@@ -2,7 +2,6 @@
 
 One tiny Python app. No database, frameworks, passwords, or cloud bill.
 
-## What you will teach
 
 1. **Kubernetes**: build and deploy a container on KIND.
 2. **GitOps**: Argo CD watches GitHub and applies changes to Kubernetes.
