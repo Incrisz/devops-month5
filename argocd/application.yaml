@@ -1,0 +1,22 @@
+# EDIT repoURL to your own PUBLIC GitHub repository before applying.
+# Do not put this file in k8s/ (it manages the k8s/ directory).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/YOUR-USERNAME/month5-kind-devops.git
+    targetRevision: HEAD
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
