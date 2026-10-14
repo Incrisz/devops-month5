@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: devops-demo:v1
+          image: incriszz/month5:v1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
