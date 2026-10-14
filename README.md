@@ -39,10 +39,12 @@ docker build -t devops-demo:v1 .
 kind load docker-image devops-demo:v1 --name devops-class
 kubectl apply -f k8s/
 kubectl get pods -n demo
-kubectl port-forward -n demo service/demo-app 8080:80
+kubectl rollout status deployment/demo-app -n demo
 ```
 
-Visit http://localhost:8080 in your browser. Visit http://localhost:8080/health and http://localhost:8080/metrics too. Leave the port-forward terminal open, or press Ctrl+C to stop it.
+Visit http://localhost:8080 in your browser. Visit http://localhost:8080/health and http://localhost:8080/metrics too. The NodePort Service uses port `30080`, and `kind/cluster.yaml` maps it to port `8080` on your computer.
+
+For an existing KIND cluster created without that port mapping, use `http://<reachable-node-ip>:30080`, or temporarily run `kubectl port-forward -n demo service/demo-app 8080:80` and visit http://localhost:8080. The localhost NodePort mapping requires creating the cluster with the provided configuration; editing the configuration does not update an existing cluster.
 
 Useful commands:
 
