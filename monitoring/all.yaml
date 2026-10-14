@@ -54,13 +54,6 @@ spec:
             - --storage.tsdb.path=/prometheus
           ports:
             - containerPort: 9090
-          resources:
-            requests:
-              cpu: 50m
-              memory: 128Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
           volumeMounts:
             - name: config
               mountPath: /etc/prometheus
@@ -79,8 +72,10 @@ metadata:
   name: prometheus
   namespace: monitoring
 spec:
+  type: NodePort
   selector:
     app: prometheus
   ports:
     - port: 9090
       targetPort: 9090
+      nodePort: 30500
